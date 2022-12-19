@@ -7,6 +7,8 @@ import edu.TranThanhTu.models.bean.BaivietBean;
 public interface IBaivietDao extends ICobanDao<BaivietBean> {
     List<BaivietBean> findAll();
 
+    List<BaivietBean> findAllInAdmin();
+
     BaivietBean findOne(String maBaiViet);
 
     List<BaivietBean> findByAuthor(String tacGia);
@@ -26,4 +28,6 @@ public interface IBaivietDao extends ICobanDao<BaivietBean> {
     int delete(String maBaiViet, String tacGia);
 
     int addReport(String maBaiViet);
+
+    int updateStatus(String maBaiViet);
 }

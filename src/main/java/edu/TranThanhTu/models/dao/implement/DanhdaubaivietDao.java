@@ -16,7 +16,8 @@ public class DanhdaubaivietDao extends CobanDao<DanhdaubaivietBean> implements I
 		+ "	JOIN ThanhVien AS tv ON tv.maThanhVien = bv.tacGia\r\n"
 		+ "	JOIN TheLoai AS tl ON tl.maTheLoai = bv.theLoai\r\n"
 		+ "	JOIN ThanhVien_BaiViet AS tvbv ON tvbv.maBaiViet = bv.maBaiViet\r\n"
-		+ "WHERE tvbv.luuBaiViet = 1 AND tvbv.maThanhVien = ?\r\n" + "ORDER BY tvbv.thoiGianLuu DESC";
+		+ "WHERE tvbv.luuBaiViet = 1 AND bv.trangThaiBaiViet = 1 AND tvbv.maThanhVien = ?\r\n"
+		+ "ORDER BY tvbv.thoiGianLuu DESC";
 	return select(sql, new DanhdaubaivietMapper(), nguoiDanhDau);
     }
 

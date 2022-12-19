@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import edu.TranThanhTu.models.bean.BinhluanBean;
+import edu.TranThanhTu.utils.Helpers;
 
 public class BinhluanMapper implements IRowMapper<BinhluanBean> {
 
@@ -22,6 +23,7 @@ public class BinhluanMapper implements IRowMapper<BinhluanBean> {
 	    bl.setTenNguoiTao(rs.getString("tenNguoiTao"));
 	    bl.setAnhDaiDien(rs.getString("anhDaiDien"));
 	    bl.setTichQuanTriVien(rs.getInt("tichQuanTriVien"));
+	    bl.setThoiGianKeTu(new Helpers().getTimeSince(rs.getTimestamp("ngayTao").getTime()));
 	    return bl;
 	} catch (SQLException e) {
 	    // TODO: handle exception

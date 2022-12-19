@@ -18,5 +18,9 @@ public interface IThanhvienDao extends ICobanDao<ThanhvienBean> {
 
     int updateInfo(ThanhvienBean tv);
 
-    int deleteInfo(ThanhvienBean tv);
+    int deleteInfo(String maThanhVien);
+
+    int changePassword(String matKhauCu, String matKhauMoi, String maThanhVien);
+
+    int updateStatus(String maThanhVien);
 }

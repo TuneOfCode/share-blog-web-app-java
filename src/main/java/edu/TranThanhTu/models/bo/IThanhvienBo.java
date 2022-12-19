@@ -17,8 +17,10 @@ public interface IThanhvienBo {
 
     int update(ThanhvienBean tv);
 
-    void destroy(String maThanhVien);
+    int destroy(String maThanhVien);
 
     List<ThanhvienBean> findAllPaginate();
+
+    int changePassword(String matKhauCu, String matKhauMoi, String maThanhVien);
 
 }

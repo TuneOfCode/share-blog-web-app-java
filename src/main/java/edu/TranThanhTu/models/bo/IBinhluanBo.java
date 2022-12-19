@@ -5,6 +5,8 @@ import java.util.List;
 import edu.TranThanhTu.models.bean.BinhluanBean;
 
 public interface IBinhluanBo {
+    List<BinhluanBean> findAll();
+
     List<BinhluanBean> findByPostId(String maBaiViet);
 
     int save(BinhluanBean bl);

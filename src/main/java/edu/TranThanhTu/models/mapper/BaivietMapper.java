@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import edu.TranThanhTu.models.bean.BaivietBean;
+import edu.TranThanhTu.models.bo.implement.BaivietBo;
+import edu.TranThanhTu.utils.Helpers;
 
 public class BaivietMapper implements IRowMapper<BaivietBean> {
 
@@ -25,6 +27,9 @@ public class BaivietMapper implements IRowMapper<BaivietBean> {
 	    b.setTenTacGia(rs.getString("tenTacGia"));
 	    b.setTenTheLoai(rs.getString("tenTheLoai"));
 	    b.setTichQuanTriVien(rs.getInt("tichQuanTriVien"));
+	    b.setThoiGianKeTu(new Helpers().getTimeSince(rs.getTimestamp("ngayXuatBan").getTime()));
+	    b.setSoLuotCamXuc(new BaivietBo().countEmotionByPostId(rs.getString("maBaiViet")));
+	    b.setSoLuotBinhLuan(new BaivietBo().countCommentByPostId(rs.getString("maBaiViet")));
 	    return b;
 	} catch (SQLException e) {
 	    // TODO: handle exception

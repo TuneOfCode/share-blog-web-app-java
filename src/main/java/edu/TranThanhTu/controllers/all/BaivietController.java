@@ -131,6 +131,8 @@ public class BaivietController {
 
 	// lấy ra số lượt cảm xúc
 	BaivietBean post = new BaivietBo().findOne(postId);
+	if (post == null)
+	    return "_error";
 	post.setSoLuotCamXuc(new BaivietBo().countEmotionByPostId(postId));
 
 	// lấy ra số lượt bình luận

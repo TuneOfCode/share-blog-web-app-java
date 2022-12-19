@@ -11,15 +11,9 @@ public class AppConfig extends WebMvcConfigurationSupport {
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
 	InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-	resolver.setPrefix("/WEB-INF/view/");
+	resolver.setPrefix("/WEB-INF/views/");
 	resolver.setSuffix(".jsp");
 
 	return resolver;
     }
-
-//    // locate our static resources and serve them
-//    @Override
-//    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-//	registry.addResourceHandler("/assets/**").addResourceLocations("/WEB-INF/assets/");
-//    }
 }

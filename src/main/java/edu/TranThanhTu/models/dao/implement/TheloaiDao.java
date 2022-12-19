@@ -16,27 +16,24 @@ public class TheloaiDao extends CobanDao<TheloaiBean> implements ITheloaiDao {
     }
 
     @Override
-    public TheloaiBean findById(String maTheLoai) {
-	// TODO Auto-generated method stub
-	return null;
-    }
-
-    @Override
     public int save(TheloaiBean tl) {
 	// TODO Auto-generated method stub
-	return 0;
+	String sql = "EXEC proc_create_category ?, ?";
+	return insert(sql, tl.getMaTheLoai(), tl.getTenTheLoai());
     }
 
     @Override
     public int update(TheloaiBean tl) {
 	// TODO Auto-generated method stub
-	return 0;
+	String sql = "EXEC proc_update_category ?, ?";
+	return update(sql, tl.getTenTheLoai(), tl.getMaTheLoai());
     }
 
     @Override
-    public int delete(TheloaiBean tl) {
+    public int delete(String maTheLoai) {
 	// TODO Auto-generated method stub
-	return 0;
+	String sql = "DELETE FROM TheLoai WHERE maTheLoai = ?";
+	return execute(sql, maTheLoai);
     }
 
 }

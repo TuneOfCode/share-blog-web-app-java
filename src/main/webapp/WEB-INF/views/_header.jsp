@@ -85,6 +85,14 @@
 								<li class="list__custom-item"><a id="profilePage"
 									href="/${myAppName }/profile/${member.getMaThanhVien()}">Trang
 										cá nhân</a></li>
+								<c:if test="${member.getQuyen() == 1 }">
+									<li class="list__custom-item list__custom-item--spread"><a
+										id="adminPage" href="/${myAppName }/admin">Trang
+											quản trị viên</a></li>
+								</c:if>
+								<li class="list__custom-item list__custom-item--spread"><a
+									id="changePasswordPage" href="/${myAppName }/change-password">Thay
+										đổi mật khẩu</a></li>
 								<li class="list__custom-item list__custom-item--spread"><a
 									id="writeBlogPage" href="/${myAppName }/write-blog">Viết
 										blog cá nhân</a></li>

@@ -200,4 +200,51 @@ public class ThanhvienController {
 	model.addAttribute("listPostsOfAuthor", listPostsOfAuthor);
 	return "manage-myblog";
     }
+
+    @RequestMapping(value = { "/change-password", "/thay-doi-mat-khau" })
+    public String ChangePassword(Model model, HttpServletRequest request, HttpServletRequest response) {
+	try {
+	    request.setCharacterEncoding("UTF-8");
+	    response.setCharacterEncoding("UTF-8");
+	    HttpSession session = request.getSession();
+	    ThanhvienBean memberLogged = (ThanhvienBean) session.getAttribute("member");
+	    if (memberLogged == null)
+		return "redirect:account";
+	    String oldPassword = request.getParameter("oldPassword");
+	    String newPassword = request.getParameter("newPassword");
+	    String reNewPassword = request.getParameter("reNewPassword");
+	    String btnChangePassword = request.getParameter("btnChangePassword");
+	    int isError = 0;
+	    if (btnChangePassword != null && oldPassword != null && newPassword != null && reNewPassword != null) {
+		if (!reNewPassword.equals(newPassword)) {
+		    System.out.println("===> message in change-password: reNewPassword not match newPassword");
+		    isError = 1;
+		    model.addAttribute("isError", isError);
+		    model.addAttribute("oldPassword", oldPassword);
+		    model.addAttribute("newPassword", newPassword);
+		    model.addAttribute("reNewPassword", reNewPassword);
+		    return "change-password";
+		}
+		int result = new ThanhvienBo().changePassword(oldPassword, reNewPassword,
+			memberLogged.getMaThanhVien());
+		if (result > 0) {
+		    System.out.println("===> change password success");
+		    isError = 0;
+		    model.addAttribute("isError", isError);
+		    return "change-password";
+		} else {
+		    System.out.println("===> change password failure");
+		    isError = 1;
+		    model.addAttribute("isError", isError);
+		    model.addAttribute("oldPassword", oldPassword);
+		    model.addAttribute("newPassword", newPassword);
+		    model.addAttribute("reNewPassword", reNewPassword);
+		}
+	    }
+	} catch (Exception e) {
+	    // TODO: handle exception
+	    e.printStackTrace();
+	}
+	return "change-password";
+    }
 }

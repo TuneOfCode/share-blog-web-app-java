@@ -47,26 +47,40 @@ public class ThanhvienDao extends CobanDao<ThanhvienBean> implements IThanhvienD
     @Override
     public int updateInfo(ThanhvienBean tv) {
 	// TODO Auto-generated method stub
-	String sql = "proc_update_member ?, ?, ?, ?, ?, ?, ?, ?";
+	String sql = "EXEC proc_update_member ?, ?, ?, ?, ?, ?, ?, ?";
 
 	return update(sql, tv.getTenThanhVien(), tv.getTenDangNhap(), tv.getEmail(), tv.getSoDienThoai(),
 		tv.getDiaChi(), tv.getAnhDaiDien(), tv.getCongViec(), tv.getMaThanhVien());
     }
 
     @Override
-    public int deleteInfo(ThanhvienBean tv) {
+    public int deleteInfo(String maThanhVien) {
 	// TODO Auto-generated method stub
 	String sql = "DELETE FROM [dbo].[ThanhVien]\r\n" + "      WHERE [maThanhVien] = ?";
-	return delete(sql, tv.getMaThanhVien());
+	return execute(sql, maThanhVien);
     }
 
     @Override
     public int insertInfo(ThanhvienBean tv) {
 	// TODO Auto-generated method stub
-	String sql = "proc_register_member ?, ?, ?, ?, ?, ?, ?, ?";
+	String sql = "EXEC proc_register_member ?, ?, ?, ?, ?, ?, ?, ?";
 
 	return insert(sql, tv.getMaThanhVien(), tv.getTenThanhVien(), tv.getTenDangNhap(), tv.getMatKhau(),
 		tv.getEmail(), tv.getSoDienThoai(), tv.getDiaChi(), tv.getCongViec());
+    }
+
+    @Override
+    public int changePassword(String matKhauCu, String matKhauMoi, String maThanhVien) {
+	// TODO Auto-generated method stub
+	String sql = "EXEC proc_change_password ?, ?, ?";
+	return update(sql, matKhauCu, matKhauMoi, maThanhVien);
+    }
+
+    @Override
+    public int updateStatus(String maThanhVien) {
+	// TODO Auto-generated method stub
+	String sql = "EXEC proc_toggle_status_member ?";
+	return update(sql, maThanhVien);
     }
 
 }

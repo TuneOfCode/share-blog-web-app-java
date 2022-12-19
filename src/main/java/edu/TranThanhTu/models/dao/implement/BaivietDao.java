@@ -19,6 +19,15 @@ public class BaivietDao extends CobanDao<BaivietBean> implements IBaivietDao {
     }
 
     @Override
+    public List<BaivietBean> findAllInAdmin() {
+	// TODO Auto-generated method stub
+	String sql = "SELECT bv.*, tv.anhDaiDien, tv.tenThanhVien AS 'tenTacGia', tl.tenTheLoai, tv.quyen AS 'tichQuanTriVien'\r\n"
+		+ "FROM BaiViet AS bv \r\n" + "	JOIN ThanhVien AS tv ON tv.maThanhVien = bv.tacGia\r\n"
+		+ "	JOIN TheLoai AS tl ON tl.maTheLoai = bv.theLoai\r\n" + "ORDER BY bv.ngayXuatBan DESC";
+	return select(sql, new BaivietMapper());
+    }
+
+    @Override
     public BaivietBean findOne(String maBaiViet) {
 	// TODO Auto-generated method stub
 	String sql = "SELECT bv.*, tv.anhDaiDien, tv.tenThanhVien AS 'tenTacGia', tl.tenTheLoai, tv.quyen AS 'tichQuanTriVien'\r\n"
@@ -115,5 +124,12 @@ public class BaivietDao extends CobanDao<BaivietBean> implements IBaivietDao {
 	    threePostTrending.add(listAllTrending.get(i));
 	}
 	return threePostTrending;
+    }
+
+    @Override
+    public int updateStatus(String maBaiViet) {
+	// TODO Auto-generated method stub
+	String sql = "EXEC proc_toggle_status_post ?";
+	return update(sql, maBaiViet);
     }
 }

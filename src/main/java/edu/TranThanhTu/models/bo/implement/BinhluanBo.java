@@ -8,6 +8,11 @@ import edu.TranThanhTu.models.dao.implement.BinhluanDao;
 import edu.TranThanhTu.models.dao.implement.CamxucbinhluanDao;
 
 public class BinhluanBo implements IBinhluanBo {
+    @Override
+    public List<BinhluanBean> findAll() {
+	// TODO Auto-generated method stub
+	return new BinhluanDao().findAll();
+    }
 
     @Override
     public List<BinhluanBean> findByPostId(String maBaiViet) {

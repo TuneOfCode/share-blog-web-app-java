@@ -12,7 +12,7 @@ public class ThanhvienBo implements IThanhvienBo {
     @Override
     public List<ThanhvienBean> findAll() {
 	// TODO Auto-generated method stub
-	return null;
+	return new ThanhvienDao().findAll();
     }
 
     @Override
@@ -48,14 +48,21 @@ public class ThanhvienBo implements IThanhvienBo {
     }
 
     @Override
-    public void destroy(String maThanhVien) {
+    public int destroy(String maThanhVien) {
 	// TODO Auto-generated method stub
-
+	return new ThanhvienDao().deleteInfo(maThanhVien);
     }
 
     @Override
     public List<ThanhvienBean> findAllPaginate() {
 	// TODO Auto-generated method stub
 	return null;
+    }
+
+    @Override
+    public int changePassword(String matKhauCu, String matKhauMoi, String maThanhVien) {
+	// TODO Auto-generated method stub
+	return new ThanhvienDao().changePassword(new Helpers().getMD5(matKhauCu), new Helpers().getMD5(matKhauMoi),
+		maThanhVien);
     }
 }

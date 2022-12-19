@@ -6,6 +6,8 @@ import edu.TranThanhTu.models.bean.BinhluanBean;
 
 public interface IBinhluanDao extends ICobanDao<BinhluanBean> {
 
+    List<BinhluanBean> findAll();
+
     List<BinhluanBean> findByPostId(String maBaiViet);
 
     int save(BinhluanBean bl);
@@ -15,4 +17,6 @@ public interface IBinhluanDao extends ICobanDao<BinhluanBean> {
     int destroy(String maBinhLuan, String maBaiViet);
 
     int addReport(String maBinhLuan, String maBaiViet);
+
+    int updateStatus(String maBinhLuan);
 }

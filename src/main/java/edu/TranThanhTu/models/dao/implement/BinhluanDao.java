@@ -7,6 +7,14 @@ import edu.TranThanhTu.models.dao.IBinhluanDao;
 import edu.TranThanhTu.models.mapper.BinhluanMapper;
 
 public class BinhluanDao extends CobanDao<BinhluanBean> implements IBinhluanDao {
+    @Override
+    public List<BinhluanBean> findAll() {
+	// TODO Auto-generated method stub
+	String sql = "SELECT bl.*, tv.tenThanhVien AS 'tenNguoiTao', tv.anhDaiDien, tv.quyen AS 'tichQuanTriVien'\r\n"
+		+ "FROM BinhLuan AS bl\r\n" + "	JOIN ThanhVien AS tv ON bl.nguoiTao = tv.maThanhVien\r\n"
+		+ "	JOIN BaiViet AS bv ON bl.maBaiViet = bv.maBaiViet\r\n" + "ORDER BY ngayTao DESC";
+	return select(sql, new BinhluanMapper());
+    }
 
     @Override
     public List<BinhluanBean> findByPostId(String maBaiViet) {
@@ -44,5 +52,12 @@ public class BinhluanDao extends CobanDao<BinhluanBean> implements IBinhluanDao 
 	// TODO Auto-generated method stub
 	String sql = "UPDATE BinhLuan SET luotBaoCao = luotBaoCao + 1 WHERE maBinhLuan = ? AND maBaiViet = ?";
 	return execute(sql, maBinhLuan, maBaiViet);
+    }
+
+    @Override
+    public int updateStatus(String maBinhLuan) {
+	// TODO Auto-generated method stub
+	String sql = "EXEC proc_toggle_status_comment ?";
+	return update(sql, maBinhLuan);
     }
 }
